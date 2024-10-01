@@ -1,15 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 
-# contains definitions of tables and associated schema constructs
+# Contains definitions of tables and associated schema constructs
 metadata = MetaData()
 
-# create the Flask SQLAlchemy extension
+# Create the Flask SQLAlchemy extension
 db = SQLAlchemy(metadata=metadata)
 
-# define a model class by inheriting from db.Model.
-
-
+# Define the Employee model
 class Employee(db.Model):
     __tablename__ = 'employees'
 
@@ -18,4 +16,15 @@ class Employee(db.Model):
     salary = db.Column(db.Integer)
 
     def __repr__(self):
-        return f'<Employee {self.id}, {self.name}, {self.salary}>'
+        return f'<Employee id={self.id}, name="{self.name}", salary={self.salary}>'
+
+# Define the Department model
+class Department(db.Model):
+    __tablename__ = 'departments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    location = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        return f'<Department id={self.id}, name="{self.name}", location="{self.location}">'
